@@ -5,11 +5,11 @@ OBJS_DIR = .objs
 OBJS_STUDENT = letter.o room.o allocator.o
 OBJS_PROVIDED = main.o fileio.o
 
-CXX = g++
-LD = g++
+CXX = clang++
+LD = clang++
 WARNINGS = -pedantic-errors -Wall -Werror -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable
 CXXFLAGS = -std=c++17 -g -O0 $(WARNINGS) -MMD -MP -c
-LDFLAGS = -lpng
+LDFLAGS = -I/opt/homebrew/include -L/opt/homebrew/lib -lpng16
 ASANFLAGS = -fsanitize=address -fno-omit-frame-pointer
 
 all: $(EXE) $(EXE)-asan

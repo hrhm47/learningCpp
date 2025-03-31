@@ -15,7 +15,7 @@
  * Creates a blank (uninitialized) room
  */
 Room::Room()
-    : name("-"), capacity(0)
+    : name("-"), capacity(0), total_students_in_Room(0), count_letters_allocated_to_Room(0)
 {
 }
 
@@ -24,16 +24,16 @@ Room::Room()
  * Creates an empty room with the given name and capacity
  */
 Room::Room(const std::string & init_name, int init_capacity)
-	: name(init_name), capacity(init_capacity)
+    : name(init_name), capacity(init_capacity), total_students_in_Room(0), count_letters_allocated_to_Room(0)
 {
 }
 
 /**
  * Room copy constructor
  */
-Room::Room(const Room & other): name(other.name), capacity(other.capacity)
+Room::Room(const Room & other)
 {
-	copy(other);
+    copy(other);
 }
 
 /**
@@ -41,12 +41,12 @@ Room::Room(const Room & other): name(other.name), capacity(other.capacity)
  */
 Room & Room::operator=(const Room & other)
 {
-	if (this != &other)
-	{
-		clear();
-		copy(other);
-	}
-	return *this;
+    if (this != &other)
+    {
+        clear();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -54,7 +54,7 @@ Room & Room::operator=(const Room & other)
  */
 Room::~Room()
 {
-	clear();
+	
 }
 
 /**
@@ -62,8 +62,9 @@ Room::~Room()
  */
 void Room::addLetter(const Letter & L)
 {
-  letters[count_letters_allocated_to_Room++] = L;
-  total_students_in_Room += L.count_students_for_letter;
+	 letters.push_back(L); // Directly add to the vector
+    count_letters_allocated_to_Room++; // Increment the count
+    total_students_in_Room += L.count_students_for_letter;
 }
 
 /**
@@ -100,7 +101,8 @@ int Room::getCapacity() const
  */
 void Room::clear()
 {
-    delete [] letters;
+    
+	letters.clear(); // Use vector's clear method
     count_letters_allocated_to_Room = 0;
     total_students_in_Room = 0;
 }
@@ -110,8 +112,9 @@ void Room::clear()
  */
 void Room::copy(const Room & other)
 {
-	total_students_in_Room = other.total_students_in_Room;
-	count_letters_allocated_to_Room = other.count_letters_allocated_to_Room;
-	letters = other.letters;
+	name = other.name;
+    capacity = other.capacity;
+    total_students_in_Room = other.total_students_in_Room;
+    count_letters_allocated_to_Room = other.count_letters_allocated_to_Room;
+    letters = other.letters;
 }
-

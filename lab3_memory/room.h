@@ -8,6 +8,8 @@
 #ifndef ROOM_H
 #define ROOM_H
 
+#include <string>
+#include <vector>
 #include "letter.h"
 
 /**
@@ -82,14 +84,15 @@ private:
         int capacity;
 
         /** The number of students currently allocated to the Room */
-        int total_students_in_Room = 0; 
+        int total_students_in_Room; 
 
         /** The number of valid Letters in the Letters array */
-        int count_letters_allocated_to_Room = 0; 
+        int count_letters_allocated_to_Room ; 
 
         /** An array of Letters currently allocated */
         /** Should be replaced with a vector instead */  
-        Letter * letters;
+        // Letter * letters;
+        std::vector<Letter> letters;
   
         /**
          * Destructor/assignment operator clear helper function.
